@@ -22,14 +22,14 @@ pipeline {
       stage('Docker Build and Push') {
         steps {
             sh 'printenv'
-            sh 'docker build -t h4d3rach/numeric-app:""$GIT_COMMIT"" .'
+            sh 'docker build -t numeric-app:""$GIT_COMMIT"" .'
         }
       }
 
       stage('Kubernetes Deployment - DEV') {
       steps {
         withKubeConfig([credentialsId: 'kubeconfig']) {
-          sh "sed -i 's#replace#h4d3rach/numeric-app:${GIT_COMMIT}#g' k8s_deployment_service.yaml"
+          sh "sed -i 's#replace#numeric-app:${GIT_COMMIT}#g' k8s_deployment_service.yaml"
           sh "kubectl apply -f k8s_deployment_service.yaml"
         }
       }
