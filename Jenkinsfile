@@ -19,10 +19,10 @@ pipeline {
         }
       }
     }
-      stage('Docker Build and Push') {
+      stage('Docker Build') {
         steps {
             sh 'printenv'
-            sh 'docker build -t numeric-app:""$GIT_COMMIT"" .'
+            sh 'docker build -t numeric-app:dev .'
         }
       }
 

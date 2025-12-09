@@ -16,9 +16,8 @@ spec:
         app: devsecops
     spec:
       containers:
-      - image: replace
+      - image: numeric-app:dev
         name: devsecops-container
-        imagePullPolicy: Never
 ---
 apiVersion: v1
 kind: Service
