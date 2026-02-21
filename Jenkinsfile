@@ -48,7 +48,11 @@ pipeline {
       stage('Docker Build') {
         steps {
             withDockerRegistry([credentialsId: 'docker-hub', url:'']){
-            sh 'printenv'
+            sh 'echo USER: $(whoami)'
+    sh 'echo HOST: $(hostname)'
+    sh 'which docker || echo "docker no encontrado"'
+    sh 'docker --version || echo "docker no existe"'
+    sh 'which kubectl || echo "kubectl no encontrado"'
             sh 'docker build -t h4d3rach/numeric-app:""$GIT_COMMIT"" .'
             sh 'docker push h4d3rach/numeric-app:""$GIT_COMMIT""'
           }
